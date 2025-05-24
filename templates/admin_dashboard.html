@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e0f7fa; /* Canlı turkuaz arka plan rengi */
+            font-family: 'Open Sans', sans-serif;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .dashboard-title {
+            color: #00796b; /* Canlı yeşil başlık rengi */
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            text-align: center;
+        }
+        .card-custom {
+            background-color: #ffffff; /* Kartların arka plan rengi */
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .list-group-item {
+            border: none;
+            border-radius: 10px;
+            background-color: #b2dfdb; /* Daha canlı bir kart rengi */
+            color: #004d40; /* Yazı rengi */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+        .btn-primary {
+            background-color: #26a69a; /* Canlı yeşil buton rengi */
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-weight: 700;
+        }
+        .btn-primary:hover {
+            background-color: #00796b; /* Koyu yeşil hover rengi */
+        }
+        .btn-danger {
+            background-color: #ff5252; /* Canlı kırmızı buton rengi */
+            border: none;
+            border-radius: 20px;
+            padding: 5px 15px;
+        }
+        .btn-danger:hover {
+            background-color: #c62828; /* Koyu kırmızı hover rengi */
+        }
+        .btn-secondary {
+            background-color: #004d40; /* Koyu yeşil buton rengi */
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-weight: 700;
+        }
+        .btn-secondary:hover {
+            background-color: #00332b; /* Koyu daha koyu yeşil hover rengi */
+        }
+        .form-control {
+            border-radius: 25px;
+            border: 1px solid #00796b;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .form-group input::placeholder {
+            color: #004d40; /* Placeholder rengi */
+        }
+        .btn {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="dashboard-title my-4">Admin Dashboard</h1>
+
+        <div class="card-custom">
+            <h2>Products</h2>
+            <ul class="list-group">
+                {% for product in products %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ product[1] }} - {{ product[2] }}
+                    <a href="{{ url_for('delete_product_route', product_id=product[0]) }}" class="btn btn-danger btn-sm">Delete</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card-custom">
+            <h2>Add Product</h2>
+            <form action="{{ url_for('dashboard') }}" method="post">
+                <div class="form-group">
+                    <input type="text" name="product_name" class="form-control" placeholder="Product Name" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Product</button>
+            </form>
+        </div>
+
+        <div class="card-custom">
+            <h2>Sessions</h2>
+            <ul class="list-group">
+                {% for session in sessions %}
+                <li class="list-group-item">
+                    Session ID: {{ session[0] }}, User ID: {{ session[1] }}, Username: {{ session[2] }}, Login Time: {{ session[3] }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Login Activity Graph -->
+        <div class="card-custom">
+            <h2>Login Activity</h2>
+            {% if graph_url %}
+                <img src="data:image/png;base64,{{ graph_url }}" alt="Login Activity">
+            {% else %}
+                <p>No login activity data available.</p>
+            {% endif %}
+        </div>
+
+        <!-- Candlestick Chart for 24-Hour Session Activity -->
+        <div class="card-custom">
+            <h2>24-Hour Session Activity</h2>
+            {% if candlestick_graph_url %}
+                <img src="data:image/png;base64,{{ candlestick_graph_url }}" alt="24-Hour Session Activity">
+            {% else %}
+                <p>No session activity data available for the last 24 hours.</p>
+            {% endif %}
+        </div>
+
+        <!-- New button for High Lag Records -->
+        <div class="card-custom">
+            <h2>High Lag Records</h2>
+            <form action="{{ url_for('view_high_lag') }}">
+                <button type="submit" class="btn btn-primary">View High Lag Records</button>
+            </form>
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="btn btn-secondary mt-4">Logout</a>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

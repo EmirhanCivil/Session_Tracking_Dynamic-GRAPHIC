@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Lag Data</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgba(255, 68, 0, 0.99); /* Vibrant orange background */
+            font-family: 'Roboto', sans-serif; /* Roboto font for all text */
+        }
+        .container {
+            margin-top: 20px;
+        }
+        h1 {
+            font-weight: 700; /* Bold font for the heading */
+            color: #ffffff; /* White color for text */
+        }
+        img {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adding a subtle shadow to the image */
+        }
+        .alert {
+            font-weight: 400; /* Regular font weight for alerts */
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 10px; /* Adds space between buttons */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="mb-4">Database Lag Analysis</h1>
+            <div class="nav-buttons">
+                <a href="/admin_dashboard" class="btn btn-primary">Back to Admin Dashboard</a> <!-- Back to dashboard button -->
+                <a href="/logout" class="btn btn-danger">Logout</a> <!-- Logout Button -->
+            </div>
+        </div>
+        <div class="text-center">
+            <img src="data:image/png;base64,{{ graph_url }}" alt="Lag Graph" class="img-fluid">
+        </div>
+        {% if message %}
+            <p class="alert alert-warning text-center">{{ message }}</p>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

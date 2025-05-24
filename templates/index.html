@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+         body {
+            background-image: url('{{ url_for('static', filename='databaseresimver4.jpg') }}'); /* Arka plan resmi */
+            background-size: cover; /* Resmin boyutunu ekranın tamamına göre ayarla */
+            background-position: center; /* Resmi ortala */
+            background-repeat: no-repeat; /* Resmin tekrar etmesini engelle */
+            color: white; /* Yazı rengini beyaz yap */
+        }
+        .ellipse-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .ellipse {
+            background-color: #6D6D6D; /* fume elips rengi */
+            color: white;
+            border-radius: 50%;
+            padding: 20px;
+            font-size: 2em;
+            text-align: center;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .btn-custom {
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ellipse-container">
+        <div class="ellipse">
+            Civil's App
+        </div>
+        <div class="button-container">
+            <a href="/login" class="btn btn-primary btn-custom">Login</a>
+            <a href="/register" class="btn btn-secondary btn-custom">Register</a>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

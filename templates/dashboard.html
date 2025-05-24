@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #00bcd4; /* Daha canlı bir turkuaz arka plan */
+            font-family: 'Open Sans', sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .dashboard-title {
+            color: #ffffff; /* Beyaz başlık rengi */
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            text-align: center;
+        }
+        .list-group-item {
+            border: none;
+            border-radius: 10px;
+            background-color: #ffffff; /* Canlı beyaz kart rengi */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+            padding: 15px;
+        }
+        .btn-custom {
+            background-color: #ff5722; /* Canlı turuncu buton rengi */
+            color: #ffffff; /* Beyaz metin rengi */
+            border-radius: 25px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+            border: none;
+            padding: 10px 20px;
+        }
+        .btn-custom:hover {
+            background-color: #e64a19; /* Koyu turuncu hover rengi */
+        }
+        .btn-secondary-custom {
+            background-color: #4caf50; /* Canlı yeşil buton rengi */
+            color: #ffffff; /* Beyaz metin rengi */
+            border-radius: 25px;
+            border: none;
+            padding: 10px 20px;
+        }
+        .btn-secondary-custom:hover {
+            background-color: #388e3c; /* Koyu yeşil hover rengi */
+        }
+        .form-control {
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .form-group input::placeholder {
+            color: #6c757d; /* Placeholder rengi */
+        }
+        .card-custom {
+            background-color: #ffffff; /* Beyaz kart arka planı */
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="dashboard-title my-4">User Dashboard</h1>
+
+        <div class="card-custom mb-4">
+            <h2>Products</h2>
+            <ul class="list-group">
+                {% for product in products %}
+                <li class="list-group-item">
+                    {{ product[1] }} - {{ product[2] }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="card-custom mb-4">
+            <h2>Add Product</h2>
+            <form action="{{ url_for('dashboard') }}" method="post">
+                <div class="form-group">
+                    <input type="text" name="product_name" class="form-control" placeholder="Product Name" required>
+                </div>
+                <button type="submit" class="btn btn-custom">Add Product</button>
+            </form>
+        </div>
+
+        <a href="{{ url_for('logout') }}" class="btn btn-secondary-custom">Logout</a>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
