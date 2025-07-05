@@ -8,7 +8,7 @@ from database import init_db, register_user, login_user, create_product, get_pro
 
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Güvenlik amacıyla rastgele bir anahtar kullanın
+app.secret_key = 'your_secret_key' 
 
 # Oracle veritabanı bağlantısını başlatın
 def get_db_connection():
@@ -35,7 +35,7 @@ def login():
             session['user_id'] = user[0]
             session['role'] = user[3]
 
-            # Kullanıcı oturum açarsa session'ı kaydedin
+            # Kullanıcı oturum açarsa sessionı kaydedin
             cursor = conn.cursor()
             cursor.execute("INSERT INTO oturumlar (user_id, login_time) VALUES (:1, SYSTIMESTAMP)", (user[0],))
             conn.commit()
